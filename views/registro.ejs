@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<main class="page-main">
+    <section class="form-layout">
+        <div class="form-intro">
+            <p class="eyebrow">TU SIGUIENTE PASO EMPIEZA AQUÍ</p>
+            <h1>Abre la puerta a nuevas ideas.</h1>
+            <p>Crea tu cuenta y encuentra una formación que encaje contigo.</p>
+        </div>
+        <div class="form-card">
+            <h2>Crear una cuenta</h2>
+            <p class="form-subtitle">Solo necesitas unos datos para empezar.</p>
+            <% if (error) { %>
+                <p class="form-error" role="alert"><%= error %></p>
+            <% } %>
+            <form class="account-form" action="/registro" method="post">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" value="<%= datos.nombre || '' %>" minlength="2" maxlength="60" autocomplete="name" required>
+
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" value="<%= datos.email || '' %>" maxlength="254" autocomplete="email" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" minlength="8" maxlength="72" autocomplete="new-password" aria-describedby="password-help" required>
+                <span class="field-help" id="password-help">Al menos 8 caracteres.</span>
+
+                <button class="button form-submit" type="submit">Crear cuenta</button>
+            </form>
+            <p class="form-switch">¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a></p>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

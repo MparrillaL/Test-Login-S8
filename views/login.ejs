@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<main class="page-main">
+    <section class="form-layout">
+        <div class="form-intro">
+            <p class="eyebrow">QUÉ BUENO VERTE DE NUEVO</p>
+            <h1>Continúa aprendiendo.</h1>
+            <p>Accede a tu cuenta para volver a tu espacio de formación.</p>
+        </div>
+        <div class="form-card">
+            <h2>Iniciar sesión</h2>
+            <p class="form-subtitle">Introduce tus datos para continuar.</p>
+            <% if (registrado) { %>
+                <p class="form-notice" role="status">Tu cuenta está lista. Ya puedes iniciar sesión.</p>
+            <% } %>
+            <% if (error) { %>
+                <p class="form-error" role="alert"><%= error %></p>
+            <% } %>
+            <form class="account-form" action="/login" method="post">
+                <input type="hidden" name="destino" value="<%= destino %>">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
+
+                <button class="button form-submit" type="submit">Iniciar sesión</button>
+            </form>
+            <p class="form-switch">¿Aún no tienes cuenta? <a href="/registro">Crear una cuenta</a></p>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

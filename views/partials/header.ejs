@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descubre cursos prácticos para impulsar tu desarrollo profesional.">
+    <title><%= typeof titulo !== 'undefined' ? titulo : 'Cursos | Formación para avanzar' %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navigation" aria-label="Navegación principal">
+            <a class="brand" href="/" aria-label="Cursos, inicio">
+                <span class="brand-mark" aria-hidden="true">C</span>
+                <span>Cursos<span class="brand-period">.</span></span>
+            </a>
+            <div class="navigation-links">
+                <a class="nav-link nav-link-current" href="/#cursos">Formación</a>
+                <a class="nav-link basket-link" href="/cesta">Cesta <span class="basket-count"><%= typeof cestaCount !== 'undefined' ? cestaCount : 0 %></span></a>
+                <% if (typeof usuario !== 'undefined' && usuario) { %>
+                    <a class="nav-link" href="/perfil">Hola, <%= usuario.nombre %></a>
+                    <form class="logout-form" action="/logout" method="post">
+                        <button class="nav-link logout-button" type="submit">Salir</button>
+                    </form>
+                <% } else { %>
+                    <a class="nav-link" href="/login">Iniciar sesión</a>
+                    <a class="button button-small" href="/registro">Crear cuenta</a>
+                <% } %>
+            </div>
+        </nav>
+    </header>

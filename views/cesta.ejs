@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<main class="page-main">
+    <section class="page-heading">
+        <p class="eyebrow">TU SELECCIÓN</p>
+        <h1>Tu cesta de cursos</h1>
+        <p>Revisa los cursos que te interesan antes de continuar.</p>
+    </section>
+
+    <% if (cursosCesta.length) { %>
+        <div class="basket-layout">
+            <section class="basket-items" aria-label="Cursos añadidos">
+                <% cursosCesta.forEach((curso) => { %>
+                    <article class="basket-item">
+                        <div class="basket-course-icon" aria-hidden="true">C</div>
+                        <div class="basket-course-info">
+                            <span class="course-number">CURSO <%= String(curso.id).padStart(2, '0') %></span>
+                            <h2><%= curso.nombre %></h2>
+                            <span class="detail-label"><%= curso.plazas %> plazas disponibles</span>
+                        </div>
+                        <strong class="basket-price"><%= Number(curso.precio).toLocaleString('es-ES') %> €</strong>
+                        <form action="/cesta/<%= curso.id %>/eliminar" method="post">
+                            <button class="remove-button" type="submit" aria-label="Quitar <%= curso.nombre %> de la cesta">Quitar</button>
+                        </form>
+                    </article>
+                <% }); %>
+            </section>
+
+            <aside class="basket-summary">
+                <p class="eyebrow">RESUMEN</p>
+                <h2>Tu selección</h2>
+                <p class="summary-line"><span>Cursos</span><strong><%= cursosCesta.length %></strong></p>
+                <p class="summary-line summary-total"><span>Total</span><strong><%= Number(total).toLocaleString('es-ES') %> €</strong></p>
+                <p class="summary-note">Añadir un curso a la cesta no reserva una plaza.</p>
+                <a class="button summary-button" href="/#cursos">Seguir explorando</a>
+            </aside>
+        </div>
+    <% } else { %>
+        <section class="empty-state basket-empty">
+            <span class="empty-icon" aria-hidden="true">＋</span>
+            <h2>Tu cesta está esperando una idea.</h2>
+            <p>Aún no has añadido ningún curso. Explora la formación y guarda aquí los que te interesen.</p>
+            <a class="button" href="/#cursos">Explorar cursos</a>
+        </section>
+    <% } %>
+</main>
+
+<% if (mensaje) { %>
+    <p id="mensaje-cesta" hidden><%= mensaje %></p>
+    <script>
+        window.alert(document.getElementById('mensaje-cesta').textContent);
+    </script>
+<% } %>
+
+<%- include('partials/footer') %>

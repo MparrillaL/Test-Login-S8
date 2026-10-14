@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">APRENDE. CRECE. AVANZA.</p>
+            <h1>Invierte en lo que puedes llegar a ser.</h1>
+            <p class="hero-description">
+                Formación práctica para desarrollar habilidades que abren nuevas oportunidades.
+                Encuentra tu próximo reto entre nuestros cursos.
+            </p>
+            <a class="button button-primary" href="#cursos">Explorar cursos <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-note" aria-label="Información sobre la oferta formativa">
+            <span class="hero-note-icon" aria-hidden="true">✦</span>
+            <p>Conocimientos actuales,<br><strong>posibilidades reales.</strong></p>
+        </div>
+    </section>
+
+    <section class="courses-section" id="cursos">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">NUESTRA FORMACIÓN</p>
+                <h2>Encuentra tu próximo curso</h2>
+            </div>
+            <p class="section-description">Programas diseñados para llevar tus ideas más lejos.</p>
+        </div>
+
+        <div class="course-grid">
+            <% cursos.forEach(function(curso) { %>
+                <article class="course-card">
+                    <div class="course-card-top">
+                        <span class="course-number">CURSO <%= String(curso.id).padStart(2, '0') %></span>
+                        <span class="course-mark" aria-hidden="true">↗</span>
+                    </div>
+                    <h3><%= curso.nombre %></h3>
+                    <div class="course-details">
+                        <p><span class="detail-label">Plazas disponibles</span><strong><%= curso.plazas %></strong></p>
+                        <p class="course-price"><span class="detail-label">Precio</span><strong><%= Number(curso.precio).toLocaleString('es-ES') %> €</strong></p>
+                    </div>
+                    <form class="course-action" action="/cesta/<%= curso.id %>" method="post">
+                        <button class="button button-outline" type="submit">Añadir a la cesta</button>
+                    </form>
+                </article>
+            <% }); %>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

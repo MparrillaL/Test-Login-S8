@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<main class="page-main">
+    <section class="profile-welcome">
+        <p class="eyebrow">TU ESPACIO PERSONAL</p>
+        <h1>Hola, <%= usuario.nombre %>.</h1>
+        <p>Este es tu espacio para seguir avanzando con tu formación.</p>
+    </section>
+
+    <section class="profile-panel">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">MI FORMACIÓN</p>
+                <h2>Mis cursos</h2>
+            </div>
+            <a class="text-link" href="/#cursos">Explorar cursos <span aria-hidden="true">→</span></a>
+        </div>
+        <% if (cursosInscritos.length) { %>
+            <div class="course-grid">
+                <% cursosInscritos.forEach((curso) => { %>
+                    <article class="course-card profile-course">
+                        <span class="course-number">CURSO <%= String(curso.id).padStart(2, '0') %></span>
+                        <h3><%= curso.nombre %></h3>
+                        <span class="status-badge">Inscrito</span>
+                    </article>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <span class="empty-icon" aria-hidden="true">✦</span>
+                <h3>Tu próxima meta empieza con un curso.</h3>
+                <p>Aún no tienes cursos en tu perfil. Explora el catálogo y encuentra uno para empezar.</p>
+                <a class="button" href="/#cursos">Ver cursos</a>
+            </div>
+        <% } %>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
